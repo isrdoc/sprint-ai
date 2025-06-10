@@ -1,16 +1,24 @@
 "use client";
 
-import { BaseChart } from "../../../ui/charts/base-chart";
-import type { Options } from "highcharts";
+import { useRef } from "react";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 export function TrainingDistribution() {
-  const options: Options = {
+  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+
+  const options: Highcharts.Options = {
     chart: {
       type: "pie",
       height: 300,
     },
     title: {
       text: "Training Load Distribution",
+      align: "left",
+      style: {
+        fontSize: "16px",
+        fontWeight: "bold",
+      },
     },
     plotOptions: {
       pie: {
@@ -56,7 +64,16 @@ export function TrainingDistribution() {
         ],
       },
     ],
+    credits: {
+      enabled: false,
+    },
   };
 
-  return <BaseChart options={options} />;
+  return (
+    <HighchartsReact
+      highcharts={Highcharts}
+      options={options}
+      ref={chartComponentRef}
+    />
+  );
 }

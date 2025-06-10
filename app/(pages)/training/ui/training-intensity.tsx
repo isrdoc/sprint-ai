@@ -1,16 +1,25 @@
 "use client";
 
-import { BaseChart } from "../../../ui/charts/base-chart";
-import type { Options, Point } from "highcharts";
+import { useRef } from "react";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import type { Point } from "highcharts";
 
 export function TrainingIntensity() {
-  const options: Options = {
+  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+
+  const options: Highcharts.Options = {
     chart: {
       type: "scatter",
       height: 300,
     },
     title: {
       text: "Training Intensity Analysis",
+      align: "left",
+      style: {
+        fontSize: "16px",
+        fontWeight: "bold",
+      },
     },
     xAxis: {
       title: {
@@ -18,6 +27,10 @@ export function TrainingIntensity() {
       },
       min: 0,
       max: 120,
+      tickInterval: 20,
+      minorTickInterval: 10,
+      minorGridLineWidth: 1,
+      minorGridLineColor: "#f0f0f0",
     },
     yAxis: {
       title: {
@@ -25,6 +38,10 @@ export function TrainingIntensity() {
       },
       min: 0,
       max: 10,
+      tickInterval: 2,
+      minorTickInterval: 1,
+      minorGridLineWidth: 1,
+      minorGridLineColor: "#f0f0f0",
     },
     plotOptions: {
       scatter: {
@@ -71,7 +88,16 @@ export function TrainingIntensity() {
         return `<b>${this.series.name}</b><br/>Duration: ${this.x} min<br/>Intensity: ${this.y}/10`;
       },
     },
+    credits: {
+      enabled: false,
+    },
   };
 
-  return <BaseChart options={options} />;
+  return (
+    <HighchartsReact
+      highcharts={Highcharts}
+      options={options}
+      ref={chartComponentRef}
+    />
+  );
 }

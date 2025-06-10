@@ -1,16 +1,24 @@
 "use client";
 
-import { BaseChart } from "../../../ui/charts/base-chart";
-import type { Options } from "highcharts";
+import { useRef } from "react";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 export function PerformanceRadar() {
-  const options: Options = {
+  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+
+  const options: Highcharts.Options = {
     chart: {
       type: "area",
       height: 300,
     },
     title: {
       text: "Performance Metrics",
+      align: "left",
+      style: {
+        fontSize: "16px",
+        fontWeight: "bold",
+      },
     },
     xAxis: {
       categories: [
@@ -29,6 +37,10 @@ export function PerformanceRadar() {
       lineWidth: 0,
       min: 0,
       max: 100,
+      tickInterval: 20,
+      minorTickInterval: 10,
+      minorGridLineWidth: 1,
+      minorGridLineColor: "#f0f0f0",
     },
     plotOptions: {
       area: {
@@ -49,7 +61,16 @@ export function PerformanceRadar() {
         color: "#40c057",
       },
     ],
+    credits: {
+      enabled: false,
+    },
   };
 
-  return <BaseChart options={options} />;
+  return (
+    <HighchartsReact
+      highcharts={Highcharts}
+      options={options}
+      ref={chartComponentRef}
+    />
+  );
 }

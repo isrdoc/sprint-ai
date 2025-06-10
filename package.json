@@ -10,6 +10,7 @@
     "db-types": "supabase gen types typescript --project-id fkjpdfrzetjamuskzgwq > libs/supabase/database.types.ts"
   },
   "dependencies": {
+    "@highcharts/react": "^4.0.0-beta.2",
     "@mantine/core": "^8.0.1",
     "@mantine/dates": "^8.0.2",
     "@mantine/form": "^8.0.2",

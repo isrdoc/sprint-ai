@@ -1,13 +1,24 @@
 "use client";
 
-import { BaseChart } from "../../../ui/charts/base-chart";
-import type { Options } from "highcharts";
+import { useRef } from "react";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 export function WellnessChart() {
-  const options: Options = {
+  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+
+  const options: Highcharts.Options = {
     chart: {
       type: "area",
       height: 300,
+    },
+    title: {
+      text: "Wellness Score",
+      align: "left",
+      style: {
+        fontSize: "16px",
+        fontWeight: "bold",
+      },
     },
     xAxis: {
       categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
@@ -38,7 +49,16 @@ export function WellnessChart() {
     tooltip: {
       valueSuffix: " / 100",
     },
+    credits: {
+      enabled: false,
+    },
   };
 
-  return <BaseChart options={options} title="Wellness Score" />;
+  return (
+    <HighchartsReact
+      highcharts={Highcharts}
+      options={options}
+      ref={chartComponentRef}
+    />
+  );
 }
