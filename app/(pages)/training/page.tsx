@@ -6,15 +6,15 @@ import {
   Text,
   Paper,
   Stack,
-  Button,
   Group,
   Card,
   Badge,
   SimpleGrid,
 } from "@mantine/core";
-import { IconPlus, IconCalendar, IconClock } from "@tabler/icons-react";
+import { IconPlus, IconClock, IconCalendar } from "@tabler/icons-react";
 import { TrainingDistribution } from "./ui/training-distribution";
 import { TrainingIntensity } from "./ui/training-intensity";
+import { PrimaryButton } from "@/app/components/buttons/primary-button";
 
 export default function TrainingPlanner() {
   return (
@@ -25,7 +25,9 @@ export default function TrainingPlanner() {
             <Title order={1}>Training Planner</Title>
             <Text c="dimmed">View and manage your training sessions</Text>
           </div>
-          <Button leftSection={<IconPlus size={16} />}>New Session</Button>
+          <PrimaryButton leftSection={<IconPlus size={16} />}>
+            New Session
+          </PrimaryButton>
         </Group>
 
         <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
@@ -88,11 +90,20 @@ export default function TrainingPlanner() {
               </SimpleGrid>
             </Stack>
           </Paper>
-        </SimpleGrid>
 
-        <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
-          <TrainingDistribution />
-          <TrainingIntensity />
+          <Paper p="md" radius="md" withBorder>
+            <Stack gap="md">
+              <Title order={3}>Training Distribution</Title>
+              <TrainingDistribution />
+            </Stack>
+          </Paper>
+
+          <Paper p="md" radius="md" withBorder>
+            <Stack gap="md">
+              <Title order={3}>Training Intensity</Title>
+              <TrainingIntensity />
+            </Stack>
+          </Paper>
         </SimpleGrid>
       </Stack>
     </Container>
