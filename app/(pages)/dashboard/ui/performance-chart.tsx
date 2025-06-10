@@ -3,39 +3,49 @@
 import { useRef } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useChartTheme } from "../../../hooks/use-chart-theme";
 
 export function PerformanceChart() {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+  const theme = useChartTheme();
 
   const options: Highcharts.Options = {
     chart: {
       type: "line",
       height: 300,
+      ...theme.chart,
     },
     title: {
       text: "Performance by Muscle Group",
       align: "left",
-      style: {
-        fontSize: "16px",
-        fontWeight: "bold",
-      },
+      style: theme.title.style,
     },
     xAxis: {
       categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       title: {
         text: "Day",
+        style: theme.xAxis.title.style,
       },
+      labels: theme.xAxis.labels,
+      lineColor: theme.xAxis.lineColor,
+      tickColor: theme.xAxis.tickColor,
+      gridLineColor: theme.xAxis.gridLineColor,
     },
     yAxis: {
       title: {
         text: "Performance Score",
+        style: theme.yAxis.title.style,
       },
       min: 50,
       max: 100,
       tickInterval: 10,
       minorTickInterval: 5,
       minorGridLineWidth: 1,
-      minorGridLineColor: "#f0f0f0",
+      labels: theme.yAxis.labels,
+      lineColor: theme.yAxis.lineColor,
+      tickColor: theme.yAxis.tickColor,
+      gridLineColor: theme.yAxis.gridLineColor,
+      minorGridLineColor: theme.yAxis.minorGridLineColor,
     },
     series: [
       {
@@ -65,6 +75,9 @@ export function PerformanceChart() {
     ],
     tooltip: {
       valueSuffix: " / 100",
+      backgroundColor: theme.tooltip.backgroundColor,
+      borderColor: theme.tooltip.borderColor,
+      style: theme.tooltip.style,
     },
     plotOptions: {
       line: {
@@ -73,6 +86,9 @@ export function PerformanceChart() {
           radius: 4,
         },
       },
+    },
+    legend: {
+      itemStyle: theme.legend.itemStyle,
     },
     credits: {
       enabled: false,

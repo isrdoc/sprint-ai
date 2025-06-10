@@ -3,22 +3,22 @@
 import { useRef } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useChartTheme } from "../../../hooks/use-chart-theme";
 
 export function PerformanceRadar() {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
+  const theme = useChartTheme();
 
   const options: Highcharts.Options = {
     chart: {
       type: "area",
       height: 300,
+      ...theme.chart,
     },
     title: {
       text: "Performance Metrics",
       align: "left",
-      style: {
-        fontSize: "16px",
-        fontWeight: "bold",
-      },
+      style: theme.title.style,
     },
     xAxis: {
       categories: [
@@ -31,6 +31,7 @@ export function PerformanceRadar() {
       ],
       tickmarkPlacement: "on",
       lineWidth: 0,
+      labels: theme.xAxis.labels,
     },
     yAxis: {
       gridLineInterpolation: "polygon",
@@ -40,7 +41,9 @@ export function PerformanceRadar() {
       tickInterval: 20,
       minorTickInterval: 10,
       minorGridLineWidth: 1,
-      minorGridLineColor: "#f0f0f0",
+      labels: theme.yAxis.labels,
+      gridLineColor: theme.yAxis.gridLineColor,
+      minorGridLineColor: theme.yAxis.minorGridLineColor,
     },
     plotOptions: {
       area: {
@@ -61,6 +64,14 @@ export function PerformanceRadar() {
         color: "#40c057",
       },
     ],
+    tooltip: {
+      backgroundColor: theme.tooltip.backgroundColor,
+      borderColor: theme.tooltip.borderColor,
+      style: theme.tooltip.style,
+    },
+    legend: {
+      itemStyle: theme.legend.itemStyle,
+    },
     credits: {
       enabled: false,
     },
