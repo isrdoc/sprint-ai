@@ -1,7 +1,6 @@
-import { IconRun } from "@tabler/icons-react";
+import { Image, Tooltip } from "@mantine/core";
 import classes from "./logo.module.css";
 import Link from "next/link";
-import { Tooltip } from "@mantine/core";
 
 interface NavbarLogoProps {
   onClick?: () => void;
@@ -21,7 +20,7 @@ export function NavbarLogo({ onClick }: NavbarLogoProps) {
       >
         <div className={classes.logoIconWrapper}>
           <Tooltip label="Sprint AI" position="right" withArrow>
-            <IconRun size={24} color="white" />
+            <Image src="/icon.png" alt="Sprint AI" width={20} height={20} />
           </Tooltip>
         </div>
       </div>
