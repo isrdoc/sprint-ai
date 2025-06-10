@@ -45,7 +45,7 @@ export function MobileLayout({ children }: { children: React.ReactNode }) {
               style={{ cursor: "pointer" }}
             >
               <NavbarLogo />
-              <span className={classes.logoLabel}>Work App</span>
+              <span className={classes.logoLabel}>Sprint AI</span>
             </div>
           </Group>
 

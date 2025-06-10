@@ -46,7 +46,7 @@ export default function LoginPage() {
         <Group gap="sm" justify="center">
           <IconBriefcase size={24} />
           <Title order={2} className={classes.title}>
-            Work App
+            Sprint AI
           </Title>
         </Group>
         <Card
@@ -63,7 +63,7 @@ export default function LoginPage() {
             mb="xs"
             c={colorScheme === "dark" ? "dark.0" : "dark.9"}
           >
-            Welcome to Work App, login with
+            Welcome to Sprint AI, login with
           </Text>
           <GoogleButton
             radius="md"

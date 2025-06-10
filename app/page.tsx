@@ -182,8 +182,12 @@ export default function Dashboard() {
         <Stack gap="md">
           <Title order={3}>Performance Trends</Title>
           <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
-            <PerformanceChart />
-            <PerformanceRadar />
+            <Paper p="md" radius="md" withBorder>
+              <PerformanceChart />
+            </Paper>
+            <Paper p="md" radius="md" withBorder>
+              <PerformanceRadar />
+            </Paper>
           </SimpleGrid>
         </Stack>
       </Stack>

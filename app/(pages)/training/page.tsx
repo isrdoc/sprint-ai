@@ -38,7 +38,7 @@ export default function TrainingPlanner() {
                 <Stack gap="xs">
                   <Group justify="space-between">
                     <Text fw={500}>Upper Body Strength</Text>
-                    <Badge color="blue">June 12</Badge>
+                    <Badge color="grape">June 12</Badge>
                   </Group>
                   <Group gap="xs">
                     <IconClock size={16} />
@@ -50,7 +50,7 @@ export default function TrainingPlanner() {
                 <Stack gap="xs">
                   <Group justify="space-between">
                     <Text fw={500}>Cardio</Text>
-                    <Badge color="blue">June 14</Badge>
+                    <Badge color="grape">June 14</Badge>
                   </Group>
                   <Group gap="xs">
                     <IconClock size={16} />

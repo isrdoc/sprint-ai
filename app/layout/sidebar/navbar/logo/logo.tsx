@@ -20,7 +20,7 @@ export function NavbarLogo({ onClick }: NavbarLogoProps) {
         style={{ cursor: "pointer" }}
       >
         <div className={classes.logoIconWrapper}>
-          <Tooltip label="Dashboard" position="right" withArrow>
+          <Tooltip label="Sprint AI" position="right" withArrow>
             <IconRun size={24} color="white" />
           </Tooltip>
         </div>

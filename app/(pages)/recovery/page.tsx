@@ -90,7 +90,7 @@ export default function Recovery() {
                   <Text size="sm" c="dimmed">
                     Wellness Score
                   </Text>
-                  <Progress value={85} size="sm" color="blue" />
+                  <Progress value={85} size="sm" color="yellow" />
                 </Stack>
               </Card>
               <Text size="sm" c="dimmed">
