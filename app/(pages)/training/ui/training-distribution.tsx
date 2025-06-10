@@ -1,88 +1,90 @@
 "use client";
 
-import { useRef } from "react";
+import React, { useState } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { useChartTheme } from "../../../hooks/use-chart-theme";
+import VariablePie from "highcharts/modules/variable-pie";
+
+if (typeof Highcharts === "function") {
+  VariablePie(Highcharts);
+}
 
 export function TrainingDistribution() {
-  const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
-  const theme = useChartTheme();
-
-  const options: Highcharts.Options = {
+  const [chartOptions] = useState<Highcharts.Options>({
     chart: {
-      type: "pie",
+      type: "variablepie",
+      backgroundColor: "transparent",
       height: 300,
-      ...theme.chart,
     },
     title: {
-      text: "Training Load Distribution",
-      align: "left",
-      style: theme.title.style,
+      text: undefined,
     },
     plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: "pointer",
+      variablepie: {
         dataLabels: {
           enabled: true,
-          format: "<b>{point.name}</b>: {point.percentage:.1f}%",
-          style: theme.xAxis.labels.style,
+          format: "{point.name}",
+          style: {
+            color: "var(--mantine-color-text)",
+            fontSize: "12px",
+          },
         },
-        showInLegend: true,
+        states: {
+          hover: {
+            brightness: 0.1,
+          },
+        },
       },
+    },
+    tooltip: {
+      headerFormat: "",
+      pointFormat:
+        "<b>{point.name}</b><br>" +
+        "Volume: <b>{point.y} mins</b><br>" +
+        "Intensity: <b>{point.z}/10</b>",
     },
     series: [
       {
-        name: "Training Type",
-        type: "pie",
+        type: "variablepie",
+        minPointSize: 30,
+        innerSize: "40%",
+        zMin: 0,
+        name: "Sessions",
         data: [
           {
-            name: "Strength",
-            y: 35,
-            color: "#228be6",
+            name: "Strength Training",
+            y: 120,
+            z: 8.5,
           },
           {
             name: "Cardio",
-            y: 25,
-            color: "#40c057",
+            y: 90,
+            z: 6.2,
           },
           {
-            name: "HIIT",
-            y: 20,
-            color: "#fab005",
+            name: "Mobility",
+            y: 45,
+            z: 4.8,
           },
           {
-            name: "Recovery",
-            y: 15,
-            color: "#fa5252",
-          },
-          {
-            name: "Flexibility",
-            y: 5,
-            color: "#7950f2",
+            name: "Skill Work",
+            y: 60,
+            z: 7.1,
           },
         ],
-      },
+        colors: [
+          "var(--mantine-color-blue-6)",
+          "var(--mantine-color-green-6)",
+          "var(--mantine-color-yellow-6)",
+          "var(--mantine-color-grape-6)",
+        ],
+      } as Highcharts.SeriesVariablepieOptions,
     ],
-    tooltip: {
-      backgroundColor: theme.tooltip.backgroundColor,
-      borderColor: theme.tooltip.borderColor,
-      style: theme.tooltip.style,
-    },
-    legend: {
-      itemStyle: theme.legend.itemStyle,
-    },
-    credits: {
-      enabled: false,
-    },
-  };
+  });
 
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={options}
-      ref={chartComponentRef}
-    />
+    <div style={{ width: "100%", height: "300px" }}>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+    </div>
   );
 }
