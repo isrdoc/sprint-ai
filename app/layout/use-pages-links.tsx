@@ -1,17 +1,10 @@
-import {
-  IconFlag,
-  IconHammer,
-  IconBriefcase,
-  IconChecklist,
-} from "@tabler/icons-react";
+import { IconCalendar, IconHeartbeat } from "@tabler/icons-react";
 import { NavbarLink } from "./sidebar/navbar/navbar-link";
 import { usePathname } from "next/navigation";
 
 const pages = [
-  { icon: IconFlag, label: "Goals", path: "/goals" },
-  { icon: IconHammer, label: "Work", path: "/work" },
-  { icon: IconBriefcase, label: "Projects", path: "/projects" },
-  { icon: IconChecklist, label: "Tasks", path: "/tasks" },
+  { icon: IconCalendar, label: "Training", path: "/training" },
+  { icon: IconHeartbeat, label: "Recovery", path: "/recovery" },
 ];
 
 export function usePagesLinks() {

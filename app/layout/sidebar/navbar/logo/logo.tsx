@@ -1,4 +1,4 @@
-import { IconBriefcase } from "@tabler/icons-react";
+import { IconRun } from "@tabler/icons-react";
 import classes from "./logo.module.css";
 import Link from "next/link";
 import { Tooltip } from "@mantine/core";
@@ -20,8 +20,8 @@ export function NavbarLogo({ onClick }: NavbarLogoProps) {
         style={{ cursor: "pointer" }}
       >
         <div className={classes.logoIconWrapper}>
-          <Tooltip label="Work App" position="right" withArrow>
-            <IconBriefcase size={24} color="white" />
+          <Tooltip label="Dashboard" position="right" withArrow>
+            <IconRun size={24} color="white" />
           </Tooltip>
         </div>
       </div>
