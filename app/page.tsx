@@ -22,6 +22,7 @@ import {
 } from "@tabler/icons-react";
 import { PerformanceChart } from "./(pages)/dashboard/ui/performance-chart";
 import { PerformanceRadar } from "./(pages)/dashboard/ui/performance-radar";
+import { ReadinessGauge } from "./(pages)/dashboard/ui/readiness-gauge";
 import { useGetCurrentUser } from "./(pages)/users/api/use-get-user";
 
 export default function Dashboard() {
@@ -97,17 +98,17 @@ export default function Dashboard() {
                   <Title order={3}>Readiness Score</Title>
                 </Group>
                 <Card withBorder>
-                  <Stack gap="xs">
-                    <Text size="xl" fw={700}>
-                      82/100
-                    </Text>
-                    <Text size="sm" c="dimmed">
-                      Good to train hard today
-                    </Text>
-                    <Badge color="green" size="lg">
-                      Ready
-                    </Badge>
-                  </Stack>
+                  <Group align="center" justify="space-between">
+                    <Stack gap="xs" w="50%">
+                      <Text size="sm" c="dimmed">
+                        Good to train hard today
+                      </Text>
+                      <Badge color="green" size="lg">
+                        Ready
+                      </Badge>
+                    </Stack>
+                    <ReadinessGauge />
+                  </Group>
                 </Card>
                 <Text size="sm" c="dimmed">
                   Based on your sleep, recovery, and recent training load
