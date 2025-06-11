@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsMore from "highcharts/highcharts-more";
 import HighchartsGauge from "highcharts/modules/solid-gauge";
+import { useChartTheme } from "../../../../hooks/use-chart-theme";
 
 if (typeof Highcharts === "function") {
   HighchartsMore(Highcharts);
@@ -12,7 +13,10 @@ if (typeof Highcharts === "function") {
 }
 
 export function ReadinessGauge() {
-  const [chartOptions] = useState<Highcharts.Options>({
+  const theme = useChartTheme();
+  const chartRef = React.useRef<HighchartsReact.RefObject>(null);
+
+  const options: Highcharts.Options = {
     chart: {
       type: "gauge",
       plotBackgroundColor: "transparent",
@@ -21,6 +25,7 @@ export function ReadinessGauge() {
       plotShadow: false,
       height: "80%",
       width: 250,
+      ...theme.chart,
     },
     title: {
       text: undefined,
@@ -37,7 +42,7 @@ export function ReadinessGauge() {
       max: 100,
       tickPixelInterval: 72,
       tickPosition: "inside",
-      tickColor: "#FFFFFF",
+      tickColor: theme.yAxis.tickColor,
       tickLength: 20,
       tickWidth: 2,
       minorTickInterval: "auto",
@@ -45,6 +50,7 @@ export function ReadinessGauge() {
         distance: 20,
         style: {
           fontSize: "14px",
+          color: theme.yAxis.labels.style.color,
         },
       },
       lineWidth: 0,
@@ -79,29 +85,68 @@ export function ReadinessGauge() {
         data: [82],
         tooltip: {
           valueSuffix: "%",
+          backgroundColor: theme.tooltip.backgroundColor,
+          borderColor: theme.tooltip.borderColor,
+          style: theme.tooltip.style,
         },
         dataLabels: {
           format: "{y}%",
           borderWidth: 0,
-          color: "var(--mantine-color-text)",
+          color: theme.yAxis.labels.style.color,
           style: {
             fontSize: "16px",
           },
         },
         dial: {
           radius: "80%",
-          backgroundColor: "var(--mantine-color-dark-4)",
+          backgroundColor: theme.yAxis.labels.style.color,
           baseWidth: 8,
           baseLength: "0%",
           rearLength: "0%",
         },
         pivot: {
-          backgroundColor: "var(--mantine-color-dark-4)",
+          backgroundColor: theme.yAxis.labels.style.color,
           radius: 4,
         },
       } as Highcharts.SeriesGaugeOptions,
     ],
-  });
+  };
+
+  // Update chart when theme changes
+  useEffect(() => {
+    if (chartRef.current) {
+      const chart = chartRef.current.chart;
+      if (chart) {
+        chart.update({
+          chart: {
+            ...theme.chart,
+          },
+          yAxis: {
+            tickColor: theme.yAxis.tickColor,
+            labels: {
+              style: {
+                color: theme.yAxis.labels.style.color,
+              },
+            },
+          },
+          series: [
+            {
+              type: "gauge",
+              dataLabels: {
+                color: theme.yAxis.labels.style.color,
+              },
+              dial: {
+                backgroundColor: theme.yAxis.labels.style.color,
+              },
+              pivot: {
+                backgroundColor: theme.yAxis.labels.style.color,
+              },
+            } as Highcharts.SeriesGaugeOptions,
+          ],
+        });
+      }
+    }
+  }, [theme]);
 
   // Add animation effect
   useEffect(() => {
@@ -125,7 +170,11 @@ export function ReadinessGauge() {
 
   return (
     <div style={{ width: "250px", height: "180px", margin: "0 auto" }}>
-      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+        ref={chartRef}
+      />
     </div>
   );
 }
