@@ -25,6 +25,7 @@ import { useGetTrainingSessions } from "./api/use-get-training-sessions";
 import { useUpsertTrainingSession } from "./api/use-upsert-training-session";
 import { format, isBefore, startOfDay } from "date-fns";
 import { useState } from "react";
+import { useSprintStore } from "@/app/sprint.store";
 
 const TRAINING_TYPES = [
   "Strength Training",
@@ -46,7 +47,8 @@ type NewSession = {
 export default function TrainingPlanner() {
   const { data: sessions, isLoading } = useGetTrainingSessions();
   const { mutate: upsertSession, isPending } = useUpsertTrainingSession();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isTrainingModalOpen, openTrainingModal, closeTrainingModal } =
+    useSprintStore();
   const [newSession, setNewSession] = useState<NewSession>({
     type: "",
     duration: 60,
@@ -73,7 +75,7 @@ export default function TrainingPlanner() {
   const handleCreateSession = () => {
     upsertSession(newSession, {
       onSuccess: () => {
-        setIsModalOpen(false);
+        closeTrainingModal();
         setNewSession({
           type: "",
           duration: 60,
@@ -95,7 +97,7 @@ export default function TrainingPlanner() {
           </div>
           <PrimaryButton
             leftSection={<IconPlus size={16} />}
-            onClick={() => setIsModalOpen(true)}
+            onClick={openTrainingModal}
           >
             New Session
           </PrimaryButton>
@@ -192,8 +194,8 @@ export default function TrainingPlanner() {
       </Stack>
 
       <Modal
-        opened={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        opened={isTrainingModalOpen}
+        onClose={closeTrainingModal}
         title="New Training Session"
         size="md"
       >
@@ -241,7 +243,7 @@ export default function TrainingPlanner() {
             required
           />
           <Group justify="flex-end" mt="md">
-            <Button variant="light" onClick={() => setIsModalOpen(false)}>
+            <Button variant="light" onClick={closeTrainingModal}>
               Cancel
             </Button>
             <Button
