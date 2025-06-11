@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db-types": "supabase gen types typescript --project-id fkjpdfrzetjamuskzgwq > libs/supabase/database.types.ts"
+    "db-types": "supabase gen types typescript --project-id jpuopbxohlrfxypoqgdr > libs/supabase/database.types.ts"
   },
   "dependencies": {
     "@highcharts/react": "^4.0.0-beta.2",
@@ -18,6 +18,7 @@
     "@supabase/supabase-js": "^2.49.8",
     "@tabler/icons-react": "^3.33.0",
     "@tanstack/react-query": "^5.77.2",
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "highcharts": "^12.2.0",
     "highcharts-react-official": "^3.2.2",

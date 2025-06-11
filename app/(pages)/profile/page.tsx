@@ -32,7 +32,7 @@ export default function Profile() {
             <Stack gap="xs">
               <Title order={1}>{user?.name}</Title>
               <Text size="lg" c="dimmed">
-                29 years old • 2+ years training
+                39 years old • 2+ years training
               </Text>
               <Group gap="xs">
                 <Badge size="lg">Strength Training</Badge>
