@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { useChartTheme } from "../../../hooks/use-chart-theme";
+import { useChartTheme } from "../../../../hooks/use-chart-theme";
 
 export function PerformanceRadar() {
   const chartComponentRef = useRef<HighchartsReact.RefObject>(null);
