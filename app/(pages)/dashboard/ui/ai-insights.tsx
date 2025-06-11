@@ -9,6 +9,7 @@ import {
   Group,
   Text,
   Title,
+  Flex,
 } from "@mantine/core";
 import {
   IconBrain,
@@ -16,6 +17,7 @@ import {
   IconChartLine,
 } from "@tabler/icons-react";
 import { ReadinessGauge } from "./charts/readiness-gauge";
+import { RecoveryGauge } from "./charts/recovery-gauge";
 
 export function AIInsights() {
   return (
@@ -54,17 +56,20 @@ export function AIInsights() {
               <Title order={3}>Injury Risk</Title>
             </Group>
             <Card withBorder>
-              <Stack gap="xs">
-                <Text size="xl" fw={700}>
-                  Low
-                </Text>
-                <Text size="sm" c="dimmed">
-                  Based on consistent recovery and moderate training load
-                </Text>
-                <Badge color="green" size="lg">
-                  Safe
-                </Badge>
-              </Stack>
+              <Flex align="center" justify="space-between" gap="md">
+                <Stack gap={4} style={{ flex: 1 }}>
+                  <Text size="xl" fw={700}>
+                    Low
+                  </Text>
+                  <Text size="sm" c="dimmed">
+                    Based on consistent recovery and moderate training load
+                  </Text>
+                  <Badge color="green" size="lg">
+                    Safe
+                  </Badge>
+                </Stack>
+                <RecoveryGauge size={180} />
+              </Flex>
             </Card>
             <Text size="sm" c="dimmed">
               Keep maintaining good form and recovery practices
