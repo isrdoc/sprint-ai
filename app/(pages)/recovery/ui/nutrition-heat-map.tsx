@@ -4,6 +4,7 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsHeatmap from "highcharts/modules/heatmap";
 import HighchartsReact from "highcharts-react-official";
+import { useMantineColorScheme } from "@mantine/core";
 
 // Initialize the heatmap module
 if (typeof Highcharts === "function") {
@@ -39,83 +40,123 @@ const data = [
   [6, 2, 66],
 ];
 
-const options: Highcharts.Options = {
-  chart: {
-    type: "heatmap",
-    height: 320,
-    plotBorderWidth: 1,
-    backgroundColor: "#f9f9f9",
-    marginTop: 40,
-    marginBottom: 80,
-  },
-  title: {
-    text: undefined,
-    style: { fontSize: "1em" },
-  },
-  xAxis: {
-    categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    title: { text: "Day" },
-  },
-  yAxis: {
-    categories: ["Carbs", "Protein", "Fat"],
-    title: { text: "Macronutrient" },
-    reversed: true,
-  },
-  colorAxis: {
-    min: 0,
-    minColor: "#FFFFFF",
-    maxColor: "#40c057", // green for nutrition
-  },
-  legend: {
-    align: "right",
-    layout: "vertical",
-    margin: 0,
-    verticalAlign: "top",
-    y: 25,
-    symbolHeight: 220,
-  },
-  tooltip: {
-    formatter: function () {
-      // @ts-expect-error Highcharts context for heatmap
-      const xCat = this.series.xAxis.categories[this.point.x];
-      // @ts-expect-error Highcharts context for heatmap
-      const yCat = this.series.yAxis.categories[this.point.y];
-      // @ts-expect-error Highcharts context for heatmap
-      return `<b>${yCat}</b> <br/><b>${this.point.value}g</b> on <b>${xCat}</b>`;
-    },
-  },
-  series: [
-    {
-      name: "Macros per day",
-      borderWidth: 1,
+const NutritionHeatMap = () => {
+  const { colorScheme } = useMantineColorScheme();
+  const isDark = colorScheme === "dark";
+
+  const options: Highcharts.Options = {
+    chart: {
       type: "heatmap",
-      data: data,
-      dataLabels: {
-        enabled: true,
-        color: "#000",
-        style: { fontSize: "0.9em" },
+      height: 320,
+      plotBorderWidth: 1,
+      backgroundColor: "transparent",
+      marginTop: 40,
+      marginBottom: 80,
+    },
+    title: {
+      text: undefined,
+      style: {
+        fontSize: "1em",
+        color: isDark ? "#C1C2C5" : "#000000",
       },
     },
-  ],
-  credits: { enabled: false },
-  responsive: {
-    rules: [
+    xAxis: {
+      categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      title: {
+        text: "Weekday",
+        style: {
+          color: isDark ? "#C1C2C5" : "#000000",
+        },
+      },
+      labels: {
+        style: {
+          color: isDark ? "#C1C2C5" : "#000000",
+        },
+      },
+    },
+    yAxis: {
+      categories: ["Carbs", "Protein", "Fat"],
+      title: {
+        text: "Macronutrient",
+        style: {
+          color: isDark ? "#C1C2C5" : "#000000",
+        },
+      },
+      labels: {
+        style: {
+          color: isDark ? "#C1C2C5" : "#000000",
+        },
+      },
+      reversed: true,
+    },
+    colorAxis: {
+      min: 0,
+      minColor: isDark ? "#2C2E33" : "#FFFFFF",
+      maxColor: "#40c057", // green for nutrition
+      labels: {
+        style: {
+          color: isDark ? "#C1C2C5" : "#000000",
+        },
+      },
+    },
+    legend: {
+      align: "right",
+      layout: "vertical",
+      margin: 0,
+      verticalAlign: "top",
+      y: 25,
+      symbolHeight: 220,
+      itemStyle: {
+        color: isDark ? "#C1C2C5" : "#000000",
+      },
+    },
+    tooltip: {
+      backgroundColor: isDark ? "#2C2E33" : "#FFFFFF",
+      borderColor: isDark ? "#373A40" : "#DEE2E6",
+      style: {
+        color: isDark ? "#C1C2C5" : "#000000",
+      },
+      formatter: function () {
+        // @ts-expect-error Highcharts context for heatmap
+        const xCat = this.series.xAxis.categories[this.point.x];
+        // @ts-expect-error Highcharts context for heatmap
+        const yCat = this.series.yAxis.categories[this.point.y];
+        // @ts-expect-error Highcharts context for heatmap
+        return `<b>${yCat}</b> <br/><b>${this.point.value}g</b> on <b>${xCat}</b>`;
+      },
+    },
+    series: [
       {
-        condition: { maxWidth: 500 },
-        chartOptions: {
-          yAxis: {
-            labels: {
-              format: "{substr value 0 1}",
-            },
-          },
+        name: "Macros per day",
+        borderWidth: 1,
+        borderColor: isDark ? "#373A40" : "#DEE2E6",
+        type: "heatmap",
+        data: data,
+        dataLabels: {
+          enabled: true,
+          color: isDark ? "#C1C2C5" : "#000000",
+          style: { fontSize: "0.9em" },
         },
       },
     ],
-  },
-};
+    credits: { enabled: false },
+    responsive: {
+      rules: [
+        {
+          condition: { maxWidth: 500 },
+          chartOptions: {
+            yAxis: {
+              labels: {
+                format: "{substr value 0 1}",
+              },
+            },
+          },
+        },
+      ],
+    },
+  };
 
-const NutritionHeatMap = () => (
-  <HighchartsReact highcharts={Highcharts} options={options} />
-);
+  return <HighchartsReact highcharts={Highcharts} options={options} />;
+};
 
 export default NutritionHeatMap;
