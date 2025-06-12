@@ -16,11 +16,7 @@ export function TrainingIntensity() {
       height: 300,
       ...theme.chart,
     },
-    title: {
-      text: "Training Intensity Analysis",
-      align: "left",
-      style: theme.title.style,
-    },
+    title: { text: undefined },
     xAxis: {
       title: {
         text: "Duration (minutes)",

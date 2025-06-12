@@ -15,6 +15,7 @@ import { IconBed, IconApple, IconHeartbeat } from "@tabler/icons-react";
 import { SleepChart } from "./ui/sleep-chart";
 import { NutritionChart } from "./ui/nutrition-chart";
 import { WellnessChart } from "./ui/wellness-chart";
+import NutritionHeatMap from "./ui/nutrition-heat-map";
 
 export default function Recovery() {
   return (
@@ -100,6 +101,12 @@ export default function Recovery() {
             </Stack>
           </Paper>
         </SimpleGrid>
+        <Paper p="md" radius="md" withBorder>
+          <Stack gap="md">
+            <Title order={3}>Nutrition Macro Intake</Title>
+            <NutritionHeatMap />
+          </Stack>
+        </Paper>
       </Stack>
     </Container>
   );

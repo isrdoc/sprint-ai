@@ -26,6 +26,7 @@ import { useUpsertTrainingSession } from "./api/use-upsert-training-session";
 import { format, isBefore, startOfDay } from "date-fns";
 import { useState } from "react";
 import { useSprintStore } from "@/app/sprint.store";
+import TrainingVolumeColumnChart from "./ui/training-volume-column-chart";
 
 const TRAINING_TYPES = [
   "Strength Training",
@@ -188,6 +189,13 @@ export default function TrainingPlanner() {
             <Stack gap="md">
               <Title order={3}>Training Intensity</Title>
               <TrainingIntensity />
+            </Stack>
+          </Paper>
+
+          <Paper p="md" radius="md" withBorder>
+            <Stack gap="md">
+              <Title order={3}>Training Volume</Title>
+              <TrainingVolumeColumnChart />
             </Stack>
           </Paper>
         </SimpleGrid>

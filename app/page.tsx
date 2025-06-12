@@ -13,7 +13,7 @@ export default function Dashboard() {
     <Container size="xl" py="xl">
       <Stack gap="xl">
         <div>
-          <Title order={1}>Welcome back, {user?.name}!</Title>
+          <Title order={1}>Welcome back, {user?.name?.split(" ")[0]}!</Title>
           <Text c="dimmed" size="lg">
             Here&apos;s your progress at a glance
           </Text>
