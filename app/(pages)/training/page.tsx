@@ -27,6 +27,7 @@ import { format, isBefore, startOfDay } from "date-fns";
 import { useState } from "react";
 import { useSprintStore } from "@/app/sprint.store";
 import TrainingVolumeColumnChart from "./ui/training-volume-column-chart";
+import MuscleGroupTreemap from "./ui/muscle-group-treemap";
 
 const TRAINING_TYPES = [
   "Strength Training",
@@ -196,6 +197,13 @@ export default function TrainingPlanner() {
             <Stack gap="md">
               <Title order={3}>Training Volume</Title>
               <TrainingVolumeColumnChart />
+            </Stack>
+          </Paper>
+
+          <Paper p="md" radius="md" withBorder>
+            <Stack gap="md">
+              <Title order={3}>Muscle Group Treemap</Title>
+              <MuscleGroupTreemap />
             </Stack>
           </Paper>
         </SimpleGrid>
