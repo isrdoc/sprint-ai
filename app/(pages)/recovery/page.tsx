@@ -16,7 +16,6 @@ import { SleepChart } from "./ui/sleep-chart";
 import { NutritionChart } from "./ui/nutrition-chart";
 import { WellnessChart } from "./ui/wellness-chart";
 import NutritionHeatMap from "./ui/nutrition-heat-map";
-import PictorialChart from "./ui/composition-pictoral-chat";
 
 export default function Recovery() {
   return (
@@ -106,12 +105,6 @@ export default function Recovery() {
           <Stack gap="md">
             <Title order={3}>Nutrition Macro Intake</Title>
             <NutritionHeatMap />
-          </Stack>
-        </Paper>
-        <Paper p="md" radius="md" withBorder>
-          <Stack gap="md">
-            <Title order={3}>Body Composition</Title>
-            <PictorialChart />
           </Stack>
         </Paper>
       </Stack>

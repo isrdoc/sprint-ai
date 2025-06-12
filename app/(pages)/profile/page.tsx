@@ -14,6 +14,7 @@ import {
 } from "@mantine/core";
 import { IconTrophy, IconTarget, IconNotes } from "@tabler/icons-react";
 import { useAuth } from "@/app/(pages)/users/api/use-auth";
+import PictorialChart from "./ui/composition-pictorial-chat";
 
 export default function Profile() {
   const { user } = useAuth();
@@ -116,6 +117,12 @@ export default function Profile() {
             </Stack>
           </Paper>
         </SimpleGrid>
+        <Paper p="md" radius="md" withBorder>
+          <Stack gap="md">
+            <Title order={3}>Body Composition</Title>
+            <PictorialChart />
+          </Stack>
+        </Paper>
       </Stack>
     </Container>
   );
