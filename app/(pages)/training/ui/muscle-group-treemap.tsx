@@ -4,6 +4,7 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import TreemapModule from "highcharts/modules/treemap";
+import { useMantineColorScheme } from "@mantine/core";
 
 // Initialize the treemap module
 if (typeof Highcharts === "function") {
@@ -28,38 +29,68 @@ const data = [
   { name: "Crunches", parent: "core", value: 60 },
 ];
 
-const options: Highcharts.Options = {
-  chart: { type: "treemap", height: 400, backgroundColor: "#f9f9f9" },
-  title: { text: undefined },
-  series: [
-    {
-      type: "treemap",
-      layoutAlgorithm: "squarified",
-      interactByLeaf: true,
-      dataLabels: { enabled: true },
-      levelIsConstant: false,
-      levels: [
-        {
-          level: 1,
-          dataLabels: {
-            enabled: true,
-            style: { fontSize: "1.3em", fontWeight: "700" },
-          },
-          borderWidth: 3,
-        },
-        {
-          level: 2,
-          dataLabels: { enabled: true },
-        },
-      ],
-      data,
-    },
-  ],
-  credits: { enabled: false },
-};
+const MuscleGroupTreemap = () => {
+  const { colorScheme } = useMantineColorScheme();
+  const isDark = colorScheme === "dark";
 
-const MuscleGroupTreemap = () => (
-  <HighchartsReact highcharts={Highcharts} options={options} />
-);
+  const options: Highcharts.Options = {
+    chart: {
+      type: "treemap",
+      height: 400,
+      backgroundColor: "transparent",
+    },
+    title: { text: undefined },
+    series: [
+      {
+        type: "treemap",
+        layoutAlgorithm: "squarified",
+        interactByLeaf: true,
+        dataLabels: {
+          enabled: true,
+          style: {
+            color: isDark ? "#C1C2C5" : "#000000",
+          },
+        },
+        levelIsConstant: false,
+        levels: [
+          {
+            level: 1,
+            dataLabels: {
+              enabled: true,
+              style: {
+                fontSize: "1.3em",
+                fontWeight: "700",
+                color: isDark ? "#C1C2C5" : "#000000",
+              },
+            },
+            borderWidth: 3,
+            borderColor: isDark ? "#373A40" : "#DEE2E6",
+          },
+          {
+            level: 2,
+            dataLabels: {
+              enabled: true,
+              style: {
+                color: isDark ? "#C1C2C5" : "#000000",
+              },
+            },
+            borderColor: isDark ? "#373A40" : "#DEE2E6",
+          },
+        ],
+        data,
+      },
+    ],
+    tooltip: {
+      backgroundColor: isDark ? "#2C2E33" : "#FFFFFF",
+      borderColor: isDark ? "#373A40" : "#DEE2E6",
+      style: {
+        color: isDark ? "#C1C2C5" : "#000000",
+      },
+    },
+    credits: { enabled: false },
+  };
+
+  return <HighchartsReact highcharts={Highcharts} options={options} />;
+};
 
 export default MuscleGroupTreemap;
