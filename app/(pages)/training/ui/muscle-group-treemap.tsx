@@ -30,7 +30,7 @@ const data = [
 
 const options: Highcharts.Options = {
   chart: { type: "treemap", height: 400, backgroundColor: "#f9f9f9" },
-  title: { text: "Distribution of Exercises by Muscle Group" },
+  title: { text: undefined },
   series: [
     {
       type: "treemap",
