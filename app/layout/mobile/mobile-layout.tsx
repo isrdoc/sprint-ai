@@ -9,15 +9,21 @@ import { MobileAvatar } from "./avatar/mobile-avatar";
 import { usePagesLinks } from "../use-pages-links";
 import classes from "./mobile-layout.module.css";
 import { NavbarLogo } from "../sidebar/navbar/logo/logo";
+import { useAuth } from "@/app/(pages)/users/api/use-auth";
 
 export function MobileLayout({ children }: { children: React.ReactNode }) {
   const [opened, { toggle, close }] = useDisclosure();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const { links } = usePagesLinks();
+  const { isAuthenticated } = useAuth();
 
   const handleLogoClick = () => {
     close();
   };
+
+  if (!isAuthenticated) {
+    return <>{children}</>;
+  }
 
   return (
     <AppShell

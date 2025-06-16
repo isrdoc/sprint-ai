@@ -10,10 +10,11 @@ import {
   Divider,
   useMantineColorScheme,
   ActionIcon,
+  Image,
 } from "@mantine/core";
 import { GoogleButton } from "./google-button";
 import { useAuth } from "../api/use-auth";
-import { IconSun, IconMoon, IconBriefcase } from "@tabler/icons-react";
+import { IconSun, IconMoon } from "@tabler/icons-react";
 import classes from "./login-page.module.css";
 import { redirect } from "next/navigation";
 
@@ -44,7 +45,15 @@ export default function LoginPage() {
         data-color-scheme={colorScheme}
       >
         <Group gap="sm" justify="center">
-          <IconBriefcase size={24} />
+          <div className={classes.iconWrapper}>
+            <Image
+              src="/icon.png"
+              alt="Sprint AI"
+              width={30}
+              height={30}
+              className={classes.icon}
+            />
+          </div>
           <Title order={2} className={classes.title}>
             Sprint AI
           </Title>
